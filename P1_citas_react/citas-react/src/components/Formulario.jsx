@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-
-const Formulario = ({ pacientes, setPacientes }) => {
+import Error from "./Error";
+const Formulario = ({ pacientes, setPacientes, paciente, setPaciente }) => {
   const [nombre, setNombre] = useState("");
   const [propietario, setPropietario] = useState("");
   const [email, setEmail] = useState("");
@@ -8,6 +8,23 @@ const Formulario = ({ pacientes, setPacientes }) => {
   const [sintomas, setSintomas] = useState("");
 
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (Object.keys(paciente).length > 0) {
+      setNombre(paciente.nombre);
+      setPropietario(paciente.propietario);
+      setEmail(paciente.email);
+      setFecha(paciente.fecha);
+      setSintomas(paciente.sintomas);
+    }
+  }, [paciente]);
+
+  const generarId = () => {
+    const random = Math.random().toString(36).substr(2);
+    const fecha = Date.now().toString(36);
+    return random + fecha;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -27,9 +44,23 @@ const Formulario = ({ pacientes, setPacientes }) => {
       fecha,
       sintomas,
     };
-    //console.log(objetoPaciente);
 
-    setPacientes([...pacientes, objetoPaciente]);
+    if (paciente.id) {
+      //Editando el registro
+      objetoPaciente.id = paciente.id;
+      const pacientesAcualizados = pacientes.map((pacienteState) => {
+        return pacienteState.id === paciente.id
+          ? objetoPaciente
+          : pacienteState;
+      });
+      setPacientes(pacientesAcualizados);
+      setPaciente({});
+    } else {
+      //Nuevo registro
+      objetoPaciente.id = generarId();
+      setPacientes([...pacientes, objetoPaciente]);
+    }
+    //console.log(objetoPaciente);
 
     //Reiniciar el form
     setNombre("");
@@ -52,19 +83,16 @@ const Formulario = ({ pacientes, setPacientes }) => {
         className=" bg-white shadow-md rounded-lg py-10 px-5 mb-10"
       >
         {error && (
-          <div
-            className="bg-red-800 text-white text-center p-3 uppercase
-          font-bold mb-3 rounded-md"
-          >
+          <Error>
             <p>Todos los campos son obligatorios</p>
-          </div>
+          </Error>
         )}
         <div className="mb-5">
           <label
             htmlFor="mascota"
             className="block text-gray-700 uppercase font-bold"
           >
-            Nombre Mascota {nombre}
+            Nombre Mascota
           </label>
           <input
             id="mascota"
@@ -143,7 +171,7 @@ const Formulario = ({ pacientes, setPacientes }) => {
         <input
           type="submit"
           className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all rounded-md"
-          value="Agregar paciente"
+          value={paciente.id ? "Editar paciente" : "Agregar paciente"}
         />
       </form>
     </div>

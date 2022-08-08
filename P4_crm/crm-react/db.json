@@ -1,12 +1,20 @@
 {
   "clientes": [
     {
-      "nombre": "Juan Pablo",
+      "nombre": "Juan Pablo 1",
       "empresa": "TECNM en Celaya",
       "email": "pablomarcial99@gmail.com",
       "telefono": "4613702803",
       "notas": "asdasd",
       "id": 1
+    },
+    {
+      "nombre": "asdasd",
+      "empresa": "TECNM en Celaya",
+      "email": "17031116@itcelaya.edu.mx",
+      "telefono": "4613702803",
+      "notas": "aaaa",
+      "id": 2
     }
   ]
 }

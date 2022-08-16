@@ -33,6 +33,10 @@
       "plugin": "upload",
       "required": true,
       "pluginOptions": {}
+    },
+    "url": {
+      "type": "uid",
+      "targetField": "titulo"
     }
   }
 }

@@ -10,7 +10,7 @@ const Entrada = ({ entrada }) => {
       <div className={styles.contenido}>
         <Image
           priority="true"
-          src={imagen[0].url}
+          src={imagen.url}
           alt={`Imagen blog ${titulo}`}
           width={800}
           height={600}

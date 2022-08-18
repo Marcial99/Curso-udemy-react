@@ -5,7 +5,7 @@ import { formatearFecha } from "../../helpers";
 import styles from "../../styles/Entrada.module.css";
 const EntradaBlog = ({ entrada }) => {
   const { contenido, imagen, published_at, titulo, id } = entrada[0];
-
+  console.log(entrada);
   return (
     <Layout pagina={titulo}>
       <main className="contenedor">
@@ -15,7 +15,7 @@ const EntradaBlog = ({ entrada }) => {
             layout="responsive"
             width={800}
             height={600}
-            src={imagen[0].url}
+            src={imagen.url}
             alt={`Imagen entrada ${titulo}`}
           ></Image>
           <div className={styles.contenido}>

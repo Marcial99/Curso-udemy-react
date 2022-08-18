@@ -4,12 +4,13 @@ import Link from "next/link";
 import styles from "../styles/Guitarra.module.css";
 const Guitarra = ({ guitarra }) => {
   const { nombre, url, imagen, descripcion, precio } = guitarra;
+
   return (
     <div className={styles.guitarra}>
       <Image
         layout="responsive"
-        width={180}
-        height={350}
+        width={250}
+        height={500}
         src={imagen.url}
         alt={`Imagen Guitarra ${nombre}`}
       ></Image>

@@ -15,11 +15,12 @@ const Entrada = ({ entrada }) => {
           width={800}
           height={600}
           layout="responsive"
+          crossOrigin="anonymous"
         ></Image>
         <h3>{titulo}</h3>
         <p className={styles.fecha}>{formatearFecha(published_at)}</p>
         <p className={styles.resumen}>{resumen}</p>
-        <Link href={`/blog/${url}`}>
+        <Link href={`/blog/${url}`} crossOrigin="anonymous">
           <a className={styles.enlace}>Leer entrada</a>
         </Link>
       </div>

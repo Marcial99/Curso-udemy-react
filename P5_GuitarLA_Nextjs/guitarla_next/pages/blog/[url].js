@@ -18,6 +18,7 @@ const EntradaBlog = ({ entrada }) => {
             height={600}
             src={imagen.url}
             alt={`Imagen entrada ${titulo}`}
+            crossOrigin="anonymous"
           ></Image>
           <div className={styles.contenido}>
             <p className={styles.fecha}>{formatearFecha(published_at)}</p>

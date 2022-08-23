@@ -6,7 +6,9 @@ const NoEncontrado = () => {
     <>
       <div className={styles.no_encontrado}>
         <h1 className="heading">Página no encontrada</h1>
-        <Link href="/">Volver al inicio</Link>
+        <Link href="/" crossOrigin="anonymous">
+          Volver al inicio
+        </Link>
       </div>
     </>
   );

@@ -14,6 +14,7 @@ const Nosotros = () => {
             width={600}
             height={450}
             src="/img/nosotros.jpg"
+            crossOrigin="anonymous"
             alt="Imagen sobre nosotros"
           ></Image>
           <div>

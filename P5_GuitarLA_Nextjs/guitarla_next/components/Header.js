@@ -10,29 +10,37 @@ const Header = ({ guitarra }) => {
     <header className={styles.header}>
       <div className="contenedor">
         <div className={styles.barra}>
-          <Link href="/">
+          <Link href="/" crossOrigin="anonymous">
             <a>
               <Image
                 width={400}
                 height={100}
-                src="/img/logo.svg"
+                crossOrigin="/img/logo.svg"
                 alt="Imagen logo"
               ></Image>
             </a>
           </Link>
 
           <nav className={styles.navegacion}>
-            <Link href="/">Inicio</Link>
-            <Link href="/nosotros">Nosotros</Link>
-            <Link href="/blog">Blog</Link>
-            <Link href="/tienda">Tienda</Link>
-            <Link href="/carrito">
+            <Link href="/" crossOrigin="anonymous">
+              Inicio
+            </Link>
+            <Link href="/nosotros" crossOrigin="anonymous">
+              Nosotros
+            </Link>
+            <Link href="/blog" crossOrigin="anonymous">
+              Blog
+            </Link>
+            <Link href="/tienda" crossOrigin="anonymous">
+              Tienda
+            </Link>
+            <Link href="/carrito" crossOrigin="anonymous">
               <a>
                 <Image
                   layout="fixed"
                   width={30}
                   height={25}
-                  src="/img/carrito.png"
+                  crossOrigin="/img/carrito.png"
                   alt="imagen carrito"
                 ></Image>
               </a>
@@ -45,7 +53,7 @@ const Header = ({ guitarra }) => {
             <h2>Modelo {guitarra.nombre}</h2>
             <p>{guitarra.descripcion}</p>
             <p className={styles.precio}>${guitarra.precio}</p>
-            <Link href={`/guitarras/${guitarra.url}`}>
+            <Link href={`/guitarras/${guitarra.url}`} crossOrigin="anonymous">
               <a className={styles.enlace}>Ver producto</a>
             </Link>
           </div>
@@ -58,6 +66,7 @@ const Header = ({ guitarra }) => {
             width={500}
             height={1200}
             src="/img/header_guitarra.png"
+            crossOrigin="anonymous"
             alt="Imagen header guitarra"
           ></Image>
         </div>

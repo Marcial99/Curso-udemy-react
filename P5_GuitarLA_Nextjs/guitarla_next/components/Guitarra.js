@@ -13,12 +13,13 @@ const Guitarra = ({ guitarra }) => {
         height={500}
         src={imagen.url}
         alt={`Imagen Guitarra ${nombre}`}
+        crossOrigin="anonymous"
       ></Image>
       <div className={styles.contenido}>
         <h3>{nombre}</h3>
         <p className={styles.descripcion}>{descripcion}</p>
         <p className={styles.precio}>${precio}</p>
-        <Link href={`/guitarras/${url}`}>
+        <Link href={`/guitarras/${url}`} crossOrigin="anonymous">
           <a className={styles.enlace}>Ver Producto</a>
         </Link>
       </div>

@@ -29,6 +29,7 @@ const Carrito = ({ carrito, actualizarCantidad, eliminarProducto }) => {
                       height={480}
                       src={producto.imagen}
                       alt={`Imagen ${producto.id}`}
+                      crossOrigin="anonymous"
                     ></Image>
                   </div>
                   <div>

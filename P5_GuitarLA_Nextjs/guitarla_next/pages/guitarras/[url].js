@@ -30,6 +30,7 @@ const Producto = ({ guitarra, agregarCarrito }) => {
           height={350}
           src={imagen.url}
           alt={`Imagen Guitarra ${nombre}`}
+          crossOrigin="anonymous"
         ></Image>
         <div className={styles.contenido}>
           <h3>{nombre}</h3>

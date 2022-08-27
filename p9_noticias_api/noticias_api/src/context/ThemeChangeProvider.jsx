@@ -23,6 +23,7 @@ const ThemeChangeProvider = ({ children }) => {
       value={{
         cambiarTema,
         theme,
+        modo,
       }}
     >
       {children}

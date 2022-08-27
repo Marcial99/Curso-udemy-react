@@ -4,16 +4,61 @@ import {
   Typography,
   AppBar,
   Toolbar,
-  Button,
+  IconButton,
+  Fab,
+  Fade,
+  Box,
 } from "@mui/material";
+import BrightnessHighSharpIcon from "@mui/icons-material/BrightnessHighSharp";
+import BedtimeSharpIcon from "@mui/icons-material/BedtimeSharp";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Formulario from "./components/Formulario";
 import { NoticiasProvider } from "./context/NoticiasProvider";
 import ListadoNoticias from "./components/ListadoNoticias";
 import useThemeChange from "./hooks/useThemeChange";
-function App() {
-  const { cambiarTema, theme } = useThemeChange();
+import PropTypes from "prop-types";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+
+function ScrollTop(props) {
+  const { children } = props;
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  const handleClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      "#back-to-top-anchor"
+    );
+
+    if (anchor) {
+      anchor.scrollIntoView({
+        block: "center",
+      });
+    }
+  };
+
+  return (
+    <Fade in={trigger}>
+      <Box
+        onClick={handleClick}
+        role="presentation"
+        sx={{ position: "fixed", bottom: 16, right: 16 }}
+      >
+        {children}
+      </Box>
+    </Fade>
+  );
+}
+
+ScrollTop.propTypes = {
+  children: PropTypes.element.isRequired,
+};
+
+function App(props) {
+  const { cambiarTema, theme, modo } = useThemeChange();
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline>
@@ -22,29 +67,32 @@ function App() {
             <header>
               <Toolbar variant="dense">
                 <Typography
-                  variant="h6"
+                  variant="h5"
                   color="inherit"
                   componen="div"
-                  align="center"
                   sx={{
                     flexGrow: 1,
                   }}
                 >
                   Buscador de noticias
                 </Typography>
-                <Button
+                <IconButton
                   edge="end"
                   color="inherit"
-                  aria-label="menu"
                   sx={{ mr: 2 }}
                   onClick={cambiarTema}
                 >
-                  Cambiar tema
-                </Button>
+                  {modo === "light" ? (
+                    <BrightnessHighSharpIcon />
+                  ) : (
+                    <BedtimeSharpIcon />
+                  )}
+                </IconButton>
               </Toolbar>
             </header>
           </AppBar>
-          <Container sx={{ marginTop: 5 }}>
+          <Toolbar id="back-to-top-anchor" />
+          <Container sx={{ marginTop: 0 }}>
             <Grid
               container
               direction="row"
@@ -57,6 +105,11 @@ function App() {
             </Grid>
             <ListadoNoticias></ListadoNoticias>
           </Container>
+          <ScrollTop {...props}>
+            <Fab size="small" aria-label="scroll back to top">
+              <KeyboardArrowUpIcon />
+            </Fab>
+          </ScrollTop>
         </NoticiasProvider>
       </CssBaseline>
     </ThemeProvider>

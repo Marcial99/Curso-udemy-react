@@ -15,3 +15,8 @@ const AppSeguro = () => {
 };
 
 export default AppSeguro;
+
+const notificationLie = ref(0);
+watch(notificationData, (newData) => {
+  this.lifeNotification = newData.lifeNotification;
+});

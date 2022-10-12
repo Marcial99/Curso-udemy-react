@@ -28,13 +28,13 @@ const obtenerProyecto = async (req, res) => {
     return res.status(401).json({ msg: error.message });
   }
 
-  //Obtener tareas del proyecto
+  /* //Obtener tareas del proyecto
   const tareas = await Tarea.find().where("proyecto").equals(proyecto._id);
-
-  res.json({
-    proyecto,
-    tareas,
-  });
+ */
+  res.json(
+    proyecto
+    /* tareas, */
+  );
 };
 
 const editarProyecto = async (req, res) => {

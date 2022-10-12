@@ -6,10 +6,12 @@ import OlvidePassword from "./pages/OlvidePassword";
 import NuevoPassword from "./pages/NuevoPassword";
 import ConfirmarCuenta from "./pages/ConfirmarCuenta";
 import { AuthProvider } from "./context/AuthProvider";
-import { ProyectosProvider } from "./context/ProyectosContext";
+import { ProyectosProvider } from "./context/ProyectosProvider";
 import Proyectos from "./pages/Proyectos";
 import NuevoProyecto from "./pages/NuevoProyecto";
 import RutaProtegida from "./layouts/RutaProtegida";
+import Proyecto from "./pages/Proyecto";
+import EditarProyecto from "./pages/EditarProyecto";
 function App() {
   return (
     <BrowserRouter>
@@ -29,6 +31,8 @@ function App() {
             <Route path="/proyectos" element={<RutaProtegida />}>
               <Route index element={<Proyectos />} />
               <Route path="crear-proyecto" element={<NuevoProyecto />} />
+              <Route path=":id" element={<Proyecto />} />
+              <Route path="editar/:id" element={<EditarProyecto />} />
             </Route>
           </Routes>
         </ProyectosProvider>

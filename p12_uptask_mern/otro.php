@@ -122,7 +122,11 @@ class trpa425 extends GLOBAL{
     $Echo = $this->formHtml($db, $aData, $Accion, $Title);
     return $Echo;
   }
-  
+
+  public function delete(){
+    return "hola desde php";
+  }
+
   public function insert(){
     $aData = $_POST["adata"];
     $db = $this->_db();

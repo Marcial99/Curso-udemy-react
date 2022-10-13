@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import useProyectos from "../hooks/useProyectos";
+import ModalFormularioTarea from "../components/ModalFormularioTarea";
 const Proyecto = () => {
   const params = useParams();
-  const { obtenerProyecto, proyecto, cargando } = useProyectos();
-  console.log(proyecto);
+  const { obtenerProyecto, proyecto, cargando, handleModalTarea } =
+    useProyectos();
+
   useEffect(() => {
     obtenerProyecto(params.id);
   }, []);
@@ -43,6 +45,7 @@ const Proyecto = () => {
       <button
         type="button"
         className="flex gap-2 items-center justify-center mt-5 text-sm px-5 py-3 w-full md:w-auto rounded-lg uppercase font-bold bg-sky-400 text-white text-center"
+        onClick={handleModalTarea}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -60,6 +63,7 @@ const Proyecto = () => {
         </svg>
         Nueva tarea
       </button>
+      <ModalFormularioTarea />
     </>
   );
 };

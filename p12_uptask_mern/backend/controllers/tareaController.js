@@ -76,14 +76,42 @@ const eliminarTarea = async (req, res) => {
   }
 
   try {
-    await tarea.deleteOne();
+    const proyecto = await Proyecto.findById(tarea.proyecto);
+    proyecto.tareas.pull(tarea._id);
+
+    await Promise.allSettled([await proyecto.save(), await tarea.deleteOne()]);
+
     res.json({ msg: "La tarea se eliminó" });
   } catch (error) {
     console.log(errors);
   }
 };
 
-const cambiarEstado = async (req, res) => {};
+const cambiarEstado = async (req, res) => {
+  const { id } = req.params;
+  const tarea = await Tarea.findById(id).populate("proyecto");
+  if (!tarea) {
+    const error = new Error("Tarea no encontrada");
+    res.status(404).json({ msg: error.message });
+  }
+
+  if (
+    tarea.proyecto.creador.toString() !== req.usuario._id.toString() &&
+    !tarea.proyecto.colaboradores.some(
+      (colaborador) => colaborador._id.toString() === req.usuario._id.toString()
+    )
+  ) {
+    const error = new Error("Acción no valida");
+    res.status(403).json({ msg: error.message });
+  }
+  tarea.estado = !tarea.estado;
+  tarea.completado = req.usuario._id;
+  await tarea.save();
+  const tareaAlmacenada = await Tarea.findById(id)
+    .populate("proyecto")
+    .populate("completado");
+  res.json(tareaAlmacenada);
+};
 
 export {
   agregarTarea,

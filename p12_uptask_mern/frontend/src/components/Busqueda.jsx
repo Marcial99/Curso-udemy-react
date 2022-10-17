@@ -49,11 +49,15 @@ const Busqueda = () => {
           <Combobox
             as="div"
             className="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all"
+            onChange={(proyecto) =>
+              (window.location = `/proyectos/${proyecto._id}`)
+            }
           >
             <div className="relative">
               <Combobox.Input
                 className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-gray-800 placeholder-gray-400 focus:ring-0 sm:text-sm"
                 placeholder="Buscar..."
+                onChange={(e) => setBusqueda(e.target.value)}
               />
             </div>
 
@@ -67,7 +71,9 @@ const Busqueda = () => {
                     key={proyecto._id}
                     value={proyecto}
                     className={({ active }) =>
-                      classNames("cursor-default select-none px-4 py-2 ")
+                      classNames(
+                        "cursor-pointer select-none px-4 py-2 hover:bg-blue-600 hover:text-white "
+                      )
                     }
                   >
                     {proyecto.nombre}
